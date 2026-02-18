@@ -84,16 +84,6 @@ function copyToClipboard(text: string): boolean {
   }
 }
 
-function getBaseUrlFromReferrer(): string {
-  try {
-    const ref = document.referrer || '';
-    const parts = ref.split(/\/(issue|articles|dashboard|admin|projects|users|settings)/);
-    return parts[0] || '';
-  } catch {
-    return '';
-  }
-}
-
 // ---- Options ----
 const defaultOptions = {
   id: true,
@@ -209,8 +199,6 @@ const AppComponent: React.FunctionComponent = () => {
     return res;
   }, [activities]);
 
-  const baseUrl = useMemo(() => getBaseUrlFromReferrer(), []);
-
   const markdown = useMemo(() => {
     if (!issue) { return ''; }
     const lines: string[] = [];
@@ -277,7 +265,7 @@ const AppComponent: React.FunctionComponent = () => {
       lines.push('', '## Attachments', '');
       issue.attachments.forEach(att => {
         try {
-          const href = att.url || (baseUrl ? `${baseUrl}/_persistent/${encodeURIComponent(att.name || 'file')}` : '');
+          const href = att.url || '';
           const size = bytesToSize(att.size);
           lines.push(`- [${att.name || 'file'}](${href})${size ? ` (${size})` : ''}`);
         } catch { /* skip */ }
@@ -314,7 +302,7 @@ const AppComponent: React.FunctionComponent = () => {
     }
 
     return lines.join('\n').trim();
-  }, [issue, links, comments, options, baseUrl]);
+  }, [issue, links, comments, options]);
 
   const handleCopy = useCallback(async () => {
     try {
