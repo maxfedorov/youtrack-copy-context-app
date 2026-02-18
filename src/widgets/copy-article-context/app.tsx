@@ -5,6 +5,7 @@ import Button from '@jetbrains/ring-ui-built/components/button/button';
 import Checkbox from '@jetbrains/ring-ui-built/components/checkbox/checkbox';
 import LoaderInline from '@jetbrains/ring-ui-built/components/loader-inline/loader-inline';
 import Text from '@jetbrains/ring-ui-built/components/text/text';
+import {extractResult, safe, humanDate, bytesToSize, copyToClipboard} from '../shared/utils';
 
 // Register widget in YouTrack. To learn more, see https://www.jetbrains.com/help/youtrack/devportal-apps/apps-host-api.html
 const host = await YTApp.register();
@@ -29,50 +30,6 @@ interface ArticleData {
 
 interface ActivityItem { author?: UserRef; timestamp?: number; category?: { id?: string }; added?: any; removed?: any }
 
-// ---- Utils ----
-const extractResult = (response: unknown): any => {
-  if (response && typeof response === 'object' && 'result' in (response as object)) {
-    return (response as any).result;
-  }
-  return response;
-};
-
-function safe<T>(val: T | undefined | null, def: T): T { return (val === undefined || val === null ? def : val); }
-
-function humanDate(ts?: number): string {
-  if (!ts) { return ''; }
-  try {
-    return new Date(ts).toISOString();
-  } catch {
-    return '';
-  }
-}
-
-function bytesToSize(bytes?: number): string {
-  const b = bytes || 0;
-  if (b === 0) { return '0 B'; }
-  const k = 1024;
-  const DECIMALS = 2;
-  const sizes = ['B', 'KB', 'MB', 'GB', 'TB'];
-  const i = Math.floor(Math.log(b) / Math.log(k));
-  return `${(b / Math.pow(k, i)).toFixed(DECIMALS)} ${sizes[i]}`;
-}
-
-function copyToClipboard(text: string): boolean {
-  try {
-    const textArea = document.createElement('textarea');
-    textArea.value = text;
-    textArea.style.position = 'fixed';
-    textArea.style.left = '-9999px';
-    document.body.appendChild(textArea);
-    textArea.select();
-    const ok = document.execCommand('copy');
-    document.body.removeChild(textArea);
-    return ok;
-  } catch {
-    return false;
-  }
-}
 
 // ---- Options ----
 // Keep the same shape as the Issue widget to preserve cross-widget user preferences
@@ -260,7 +217,7 @@ const AppComponent: React.FunctionComponent = () => {
       } catch { /* ignore */ }
 
       // 2) Copy
-      const ok = copyToClipboard(markdown);
+      const ok = await copyToClipboard(markdown);
       if (ok) {
         host.alert('Context copied to clipboard', (host as any).AlertType?.SUCCESS || 'success');
         host.closeWidget();
