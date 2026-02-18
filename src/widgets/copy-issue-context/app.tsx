@@ -5,7 +5,7 @@ import Button from '@jetbrains/ring-ui-built/components/button/button';
 import Checkbox from '@jetbrains/ring-ui-built/components/checkbox/checkbox';
 import LoaderInline from '@jetbrains/ring-ui-built/components/loader-inline/loader-inline';
 import Text from '@jetbrains/ring-ui-built/components/text/text';
-import {extractResult, safe, humanDate, bytesToSize, copyToClipboard} from '../shared/utils';
+import {extractResult, safe, humanDate, bytesToSize, copyToClipboard, wrapInCodeBlock} from '../shared/utils';
 
 // Register widget in YouTrack. To learn more, see https://www.jetbrains.com/help/youtrack/devportal-apps/apps-host-api.html
 const host = await YTApp.register();
@@ -184,7 +184,7 @@ const AppComponent: React.FunctionComponent = () => {
     }
 
     if (options.description && issue.description) {
-      lines.push('', '## Description', '', issue.description.trim());
+      lines.push('', '## Description', '', wrapInCodeBlock(issue.description, 'markdown'));
     }
 
     if (options.tags && Array.isArray(issue.tags) && issue.tags.length > 0) {

@@ -59,3 +59,20 @@ export async function copyToClipboard(text: string): Promise<boolean> {
   }
   return copyWithTextarea(text);
 }
+
+/**
+ * Wraps text in a markdown code block, using a fence length (backticks) 
+ * one greater than the longest sequence of backticks in the text.
+ */
+export function wrapInCodeBlock(text: string, lang: string = 'markdown'): string {
+  const trimmed = (text || '').trim();
+  if (!trimmed) { return ''; }
+
+  const matches = trimmed.match(/`+/g);
+  const maxBackticks = matches ? Math.max(...matches.map(m => m.length)) : 0;
+  const MIN_FENCE_LENGTH = 3;
+  const fenceLength = Math.max(MIN_FENCE_LENGTH, maxBackticks + 1);
+  const fence = '`'.repeat(fenceLength);
+
+  return `${fence}${lang}\n${trimmed}\n${fence}`;
+}
