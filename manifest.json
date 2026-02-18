@@ -1,0 +1,22 @@
+{
+  "name": "copy-context",
+  "title": "Copy context as Markdown",
+  "description": "Copy issue and article context as Markdown.",
+  "$schema": "https://json.schemastore.org/youtrack-app.json",
+  "vendor": {
+    "name": "Maksim Fedorov",
+    "url": "https://github.com/maxfedorov"
+  },
+  "icon": "icon.svg",
+  "widgets": [
+
+    {
+      "key": "copy-issue-context",
+      "name": "Copy issue context as Markdown",
+      "indexPath": "copy-issue-context/index.html",
+      "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
+      "iconPath": "copy-issue-context/widget-icon.svg",
+      "description": "Copy issue context as Markdown."
+    }
+  ]
+}
