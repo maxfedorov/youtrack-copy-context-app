@@ -24,7 +24,7 @@
     },
     {
       "key": "copy-article-context",
-      "name": "Copy-Article-Context",
+      "name": "Copy article context as Markdown",
       "indexPath": "copy-article-context/index.html",
       "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
       "iconPath": "copy-article-context/widget-icon.svg",

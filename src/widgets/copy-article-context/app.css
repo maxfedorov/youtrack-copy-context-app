@@ -4,3 +4,19 @@
   gap: calc(var(--ring-unit) * 2);
   margin: calc(var(--ring-unit) / 2);
 }
+
+.widget__description {
+  margin-bottom: 8px;
+}
+
+.widget__checkbox-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.widget__actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-start;
+}
