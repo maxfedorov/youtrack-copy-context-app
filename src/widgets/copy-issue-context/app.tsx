@@ -366,7 +366,9 @@ const AppComponent: React.FunctionComponent = () => {
 
   return (
     <div className="widget">
-      <div className="widget__row" style={{display: 'flex', flexDirection: 'column', gap: 8}}>
+      <Text info>Select the issue details you want to include in the Markdown output:</Text>
+
+      <div className="widget__checkbox-group">
         {items.map(it => (
           <Checkbox
             key={it.key as string}
@@ -376,7 +378,8 @@ const AppComponent: React.FunctionComponent = () => {
           />
         ))}
       </div>
-      <div className="widget__row" style={{marginTop: 12, display: 'flex', gap: 8}}>
+
+      <div className="widget__actions">
         <Button primary onClick={handleCopy}>Copy</Button>
         <Button onClick={() => host.closeWidget()}>Cancel</Button>
       </div>

@@ -18,7 +18,8 @@
       "iconPath": "copy-issue-context/widget-icon.svg",
       "description": "Copy issue context as Markdown.",
       "expectedDimensions": {
-        "height": 350
+        "height": 300,
+        "width": 500
       }
     }
   ]
