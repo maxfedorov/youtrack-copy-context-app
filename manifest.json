@@ -16,7 +16,10 @@
       "indexPath": "copy-issue-context/index.html",
       "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
       "iconPath": "copy-issue-context/widget-icon.svg",
-      "description": "Copy issue context as Markdown."
+      "description": "Copy issue context as Markdown.",
+      "expectedDimensions": {
+        "height": 350
+      }
     }
   ]
 }
