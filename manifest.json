@@ -15,6 +15,7 @@
       "name": "Copy issue context as Markdown",
       "indexPath": "copy-issue-context/index.html",
       "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
+      "guard": "({entity}) => !entity.draft",
       "iconPath": "copy-issue-context/widget-icon.svg",
       "description": "Copy selected issue details as Markdown (ID, Summary, Description, Project, Tags, Fields, Attachments, Links, Comments).",
       "expectedDimensions": {
@@ -27,6 +28,7 @@
       "name": "Copy article context as Markdown",
       "indexPath": "copy-article-context/index.html",
       "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
+      "guard": "({entity}) => !entity.draft",
       "iconPath": "copy-article-context/widget-icon.svg",
       "description": "Copy selected article details as Markdown (ID, Summary, Content, Project, Tags, Attachments, Comments).",
       "expectedDimensions": {
