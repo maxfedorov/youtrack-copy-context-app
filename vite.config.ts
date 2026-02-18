@@ -49,6 +49,8 @@ export default defineConfig({
     rollupOptions: {
       input: {
         // List every widget entry point here
+        copyArticleContext: resolve(__dirname, 'src/widgets/copy-article-context/index.html'),
+
         copyIssueContext: resolve(__dirname, 'src/widgets/copy-issue-context/index.html'),
 
       }

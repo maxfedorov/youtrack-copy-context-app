@@ -21,6 +21,18 @@
         "height": 300,
         "width": 500
       }
+    },
+    {
+      "key": "copy-article-context",
+      "name": "Copy-Article-Context",
+      "indexPath": "copy-article-context/index.html",
+      "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
+      "iconPath": "copy-article-context/widget-icon.svg",
+      "description": "Copy article context as Markdown",
+      "expectedDimensions": {
+        "height": 300,
+        "width": 500
+      }
     }
   ]
 }
