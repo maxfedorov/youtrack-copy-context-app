@@ -1,7 +1,7 @@
 {
   "name": "copy-context",
   "title": "Copy context as Markdown",
-  "description": "Copy issue and article context to Markdown.",
+  "description": "Copy issue and article context as Markdown.",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
   "vendor": {
     "name": "Maksim Fedorov",
