@@ -333,6 +333,12 @@ const AppComponent: React.FunctionComponent = () => {
         ))}
       </div>
 
+      <div className="widget__security-note">
+        <Text info>
+          Please review the copied content before sharing it.
+        </Text>
+      </div>
+
       <div className="widget__actions">
         <Button primary onClick={handleCopy}>Copy</Button>
         <Button onClick={() => host.closeWidget()}>Cancel</Button>
