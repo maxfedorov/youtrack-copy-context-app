@@ -195,7 +195,7 @@ const AppComponent: React.FunctionComponent = () => {
     }
 
     if (options.fields && Array.isArray(issue.fields) && issue.fields.length > 0) {
-      lines.push('', '## Fields', '');
+      const fieldLines: string[] = [];
       issue.fields.forEach(f => {
         try {
           const name = f.projectCustomField?.field?.name || 'Field';
@@ -212,25 +212,31 @@ const AppComponent: React.FunctionComponent = () => {
           };
           const valueText = toText(v);
           if (valueText) {
-            lines.push(`- ${name}: ${valueText}`);
+            fieldLines.push(`- ${name}: ${valueText}`);
           }
         } catch { /* skip field */ }
       });
+      if (fieldLines.length > 0) {
+        lines.push('', '## Fields', '', ...fieldLines);
+      }
     }
 
     if (options.attachments && Array.isArray(issue.attachments) && issue.attachments.length > 0) {
-      lines.push('', '## Attachments', '');
+      const attachmentLines: string[] = [];
       issue.attachments.forEach(att => {
         try {
           const href = att.url || '';
           const size = bytesToSize(att.size);
-          lines.push(`- [${att.name || 'file'}](${href})${size ? ` (${size})` : ''}`);
+          attachmentLines.push(`- [${att.name || 'file'}](${href})${size ? ` (${size})` : ''}`);
         } catch { /* skip */ }
       });
+      if (attachmentLines.length > 0) {
+        lines.push('', '## Attachments', '', ...attachmentLines);
+      }
     }
 
     if (options.links && Array.isArray(links) && links.length > 0) {
-      lines.push('', '## Links', '');
+      const linkLines: string[] = [];
       links.forEach(link => {
         try {
           const dir = (link.direction || '').toUpperCase();
@@ -238,10 +244,13 @@ const AppComponent: React.FunctionComponent = () => {
           const label = dir === 'INWARD' ? (ltype.localizedTargetToSource || ltype.targetToSource || ltype.localizedName || ltype.name) : (ltype.localizedSourceToTarget || ltype.sourceToTarget || ltype.localizedName || ltype.name);
           const related = (link.issues || []).map(i => `${i.idReadable}${i.summary ? ` — ${i.summary}` : ''}`).filter(Boolean).join(', ');
           if (label && related) {
-            lines.push(`- ${label}: ${related}`);
+            linkLines.push(`- ${label}: ${related}`);
           }
         } catch { /* skip */ }
       });
+      if (linkLines.length > 0) {
+        lines.push('', '## Links', '', ...linkLines);
+      }
     }
 
     if (options.comments && comments.length > 0) {
