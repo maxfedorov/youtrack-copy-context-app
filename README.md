@@ -1,4 +1,4 @@
-# Copy Context and Link App
+# Copy link and context as Markdown App
 
 Copy issue and article context or a configurable Markdown link to your clipboard.
 
@@ -17,7 +17,7 @@ Copy issue and article context or a configurable Markdown link to your clipboard
   - `ISSUE_OPTIONS_MENU_ITEM` (Context and Markdown Link)
   - `ARTICLE_OPTIONS_MENU_ITEM` (Context and Markdown Link)
 - On open, the context widget loads entity data via YouTrack REST and reads per‑user settings via app backend.
-- The Markdown Link widget uses a configurable template from the app's global storage.
+- The Markdown Link widget uses a configurable template from the app's project settings.
 - On "Copy", the app saves the current checkbox configuration, copies the generated Markdown to clipboard, and closes the widget.
 
 ## REST requests (on open)
