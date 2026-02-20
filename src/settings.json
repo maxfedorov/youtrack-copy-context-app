@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Copy link as Markdown Settings",
+    "description": "Settings for Copy link as Markdown app",
+    "properties": {
+        "template": {
+            "type": "string",
+            "title": "Markdown link template",
+            "description": "Template for generating markdown links. Use {{id}} for ID, {{url}} for URL, and {{summary}} for summary. Default value: [{{id}}]({{url}}) {{summary}}",
+            "x-scope": "PROJECT"
+        }
+    },
+    "required": []
+}

@@ -10,7 +10,6 @@
   },
   "icon": "icon.svg",
   "widgets": [
-
     {
       "key": "copy-issue-context",
       "name": "Copy issue context as Markdown",
@@ -36,6 +35,30 @@
         "height": 300,
         "width": 500
       }
+    },
+    {
+      "key": "copy-issue-id-markdown-link",
+      "name": "Copy link as Markdown",
+      "indexPath": "copy-issue-id-markdown-link/index.html",
+      "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
+      "guard": "({entity}) => !entity.draft",
+      "iconPath": "copy-issue-id-markdown-link/widget-icon.svg",
+      "expectedDimensions": {
+        "height": 200
+      },
+      "description": "Widget to copy the current issue as a Markdown link using a configurable template."
+    },
+    {
+      "key": "copy-article-id-markdown-link",
+      "name": "Copy link as Markdown",
+      "indexPath": "copy-article-id-markdown-link/index.html",
+      "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
+      "guard": "({entity}) => !entity.draft",
+      "iconPath": "copy-article-id-markdown-link/widget-icon.svg",
+      "expectedDimensions": {
+        "height": 200
+      },
+      "description": "Widget to copy the current article as a Markdown link using a configurable template."
     }
   ]
 }

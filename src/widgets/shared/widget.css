@@ -1,0 +1,15 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--ring-unit) * 2);
+  margin: calc(var(--ring-unit) / 2);
+}
+.widget__row {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--ring-unit);
+}
+.widget__input {
+  flex: 1;
+  min-width: 0;
+}

@@ -53,6 +53,10 @@ export default defineConfig({
 
         copyIssueContext: resolve(__dirname, 'src/widgets/copy-issue-context/index.html'),
 
+        copyArticleIdMarkdownLink: resolve(__dirname, 'src/widgets/copy-article-id-markdown-link/index.html'),
+
+        copyIssueIdMarkdownLink: resolve(__dirname, 'src/widgets/copy-issue-id-markdown-link/index.html'),
+
       }
     }
   }

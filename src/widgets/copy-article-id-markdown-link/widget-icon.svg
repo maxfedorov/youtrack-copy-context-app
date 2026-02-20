@@ -1,0 +1,12 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="interlock-clip-32">
+      <rect x="10" y="10" width="12" height="5"/>
+    </clipPath>
+  </defs>
+  <g transform="rotate(-45 16 16)">
+    <rect x="5" y="12.5" width="14" height="7" rx="3.5" stroke="#4B4D4F" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="13" y="12.5" width="14" height="7" rx="3.5" stroke="#999BA2" stroke-width="3" stroke-linejoin="round"/>
+    <rect x="5" y="12.5" width="14" height="7" rx="3.5" stroke="#4B4D4F" stroke-width="3" stroke-linejoin="round" clip-path="url(#interlock-clip-32)"/>
+  </g>
+</svg>
