@@ -31,3 +31,15 @@ export function copyWithTextarea(text: string): boolean {
   document.body.removeChild(textArea);
   return ok;
 }
+
+export async function copyToClipboard(text: string): Promise<boolean> {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+  } catch {
+    // ignore and fallback
+  }
+  return copyWithTextarea(text);
+}

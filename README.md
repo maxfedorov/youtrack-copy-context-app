@@ -1,21 +1,24 @@
-# Copy Context App
+# Copy Context and Link App
 
-Copy issue and article context to Markdown.
+Copy issue and article context or a configurable Markdown link to your clipboard.
 
 ## Features
-- One‑click copy of selected context pieces as Markdown
-- Works for both Issues and Articles
-- Granular options per section:
-  - Issue: ID, Summary, Description, Project, Reporter, Created, Tags, Fields, Attachments, Links, Comments
-  - Article: ID, Summary, Content, Project, Reporter, Created, Tags, Attachments, Comments
-- Remembers your selection per user (stored in the `User` entity)
+- **Copy context**: One-click copy of selected context pieces as Markdown (Issue and Article).
+- **Copy Markdown Link**: A separate widget to copy the current entity as a Markdown link using a custom template.
+- Works for both Issues and Articles.
+- Granular options per section for context:
+  - Issue: ID, Summary, Description, Project, Reporter, Created, Tags, Fields, Attachments, Links, Comments.
+  - Article: ID, Summary, Content, Project, Reporter, Created, Tags, Attachments, Comments.
+- **Custom Template**: Configure the Markdown link template in the app settings on the project settings page.
+- Remembers your context selection per user (stored in the `User` entity).
 
 ## How it works
-- Two widgets are available via the Options menu:
-  - Issue: `ISSUE_OPTIONS_MENU_ITEM`
-  - Article: `ARTICLE_OPTIONS_MENU_ITEM`
-- On open, the widget loads entity data via YouTrack REST and reads per‑user settings via app backend
-- On "Copy", the app saves the current checkbox configuration, copies the generated Markdown to clipboard, and closes the widget
+- Four widgets are available via the Options menu:
+  - `ISSUE_OPTIONS_MENU_ITEM` (Context and Markdown Link)
+  - `ARTICLE_OPTIONS_MENU_ITEM` (Context and Markdown Link)
+- On open, the context widget loads entity data via YouTrack REST and reads per‑user settings via app backend.
+- The Markdown Link widget uses a configurable template from the app's global storage.
+- On "Copy", the app saves the current checkbox configuration, copies the generated Markdown to clipboard, and closes the widget.
 
 ## REST requests (on open)
 Issue widget:

@@ -1,7 +1,7 @@
 {
   "name": "copy-context",
-  "title": "Copy context as Markdown",
-  "description": "Copy issue and article context as Markdown.",
+  "title": "Copy context and link as Markdown",
+  "description": "Copy issue/article context or a configurable Markdown link to your clipboard.",
   "version": "1.0.0",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
   "vendor": {

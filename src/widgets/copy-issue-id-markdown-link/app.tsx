@@ -1,5 +1,5 @@
 import React, {memo} from 'react';
-import {CopyMarkdownLinkWidget} from '../../shared/CopyMarkdownLinkWidget';
+import {CopyMarkdownLinkWidget} from '../shared/CopyMarkdownLinkWidget';
 import './app.css';
 
 const host = await YTApp.register();

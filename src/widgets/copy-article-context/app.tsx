@@ -5,17 +5,13 @@ import Button from '@jetbrains/ring-ui-built/components/button/button';
 import Checkbox from '@jetbrains/ring-ui-built/components/checkbox/checkbox';
 import LoaderInline from '@jetbrains/ring-ui-built/components/loader-inline/loader-inline';
 import Text from '@jetbrains/ring-ui-built/components/text/text';
-import {extractResult, safe, humanDate, bytesToSize, copyToClipboard, wrapInCodeBlock} from '../shared/utils';
+import {extractResult, safe, humanDate, bytesToSize, copyToClipboard, wrapInCodeBlock, extractComments} from '../shared/utils';
+import type {UserRef, ProjectRef, TagRef, AttachmentRef, ActivityItem} from '../shared/utils';
 
 // Register widget in YouTrack. To learn more, see https://www.jetbrains.com/help/youtrack/devportal-apps/apps-host-api.html
 const host = await YTApp.register();
 
 // ---- Types ----
-interface UserRef { login?: string; fullName?: string }
-interface ProjectRef { shortName?: string; name?: string }
-interface TagRef { name?: string }
-interface AttachmentRef { id?: string; name?: string; url?: string; size?: number; mimeType?: string; created?: number; author?: UserRef }
-
 interface ArticleData {
   id?: string;
   idReadable?: string;
@@ -27,8 +23,6 @@ interface ArticleData {
   tags?: TagRef[];
   attachments?: AttachmentRef[];
 }
-
-interface ActivityItem { author?: UserRef; timestamp?: number; category?: { id?: string }; added?: any; removed?: any }
 
 
 // ---- Options ----
@@ -119,29 +113,7 @@ const AppComponent: React.FunctionComponent = () => {
     setOptions(prev => ({...prev, [key]: !prev[key]}));
   }, []);
 
-  const comments = useMemo(() => {
-    const res: { author?: string; text?: string; timestamp?: number }[] = [];
-    activities.forEach(act => {
-      try {
-        const isCommentCat = (act.category?.id || '').toLowerCase().includes('comment');
-        if (!isCommentCat) { return; }
-        const author = act.author?.fullName || act.author?.login || '';
-        const extractText = (val: any): string[] => {
-          if (!val) { return []; }
-          const arr = Array.isArray(val) ? val : [val];
-          return arr.map(v => {
-            if (!v) { return ''; }
-            if (typeof v === 'string') { return v; }
-            if (typeof v === 'object' && 'text' in v && typeof (v as any).text === 'string') { return (v as any).text; }
-            return '';
-          }).filter(Boolean);
-        };
-        const texts = [...extractText(act.added), ...extractText(act.removed)];
-        texts.forEach(t => res.push({author, text: t, timestamp: act.timestamp}));
-      } catch { /* ignore item */ }
-    });
-    return res;
-  }, [activities]);
+  const comments = useMemo(() => extractComments(activities), [activities]);
 
   const markdown = useMemo(() => {
     if (!article) { return ''; }
@@ -219,10 +191,10 @@ const AppComponent: React.FunctionComponent = () => {
       // 2) Copy
       const ok = await copyToClipboard(markdown);
       if (ok) {
-        host.alert('Context copied to clipboard', (host as any).AlertType?.SUCCESS || 'success');
+        host.alert('Context copied to clipboard', 'success');
         host.closeWidget();
       } else {
-        host.alert('Failed to copy context', (host as any).AlertType?.ERROR || 'error');
+        host.alert('Failed to copy context', 'error');
       }
     } catch (e) {
       // eslint-disable-next-line no-console

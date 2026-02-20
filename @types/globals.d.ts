@@ -3,7 +3,6 @@ type AppAPI = {
   onConfigure?: () => void;
 }
 
-import type AlertType from '@jetbrains/ring-ui-built/components/alert/alert';
 import type {RequestParams} from '@jetbrains/ring-ui-built/components/http/http';
 
 export interface HubService {
@@ -13,7 +12,7 @@ export interface HubService {
 }
 
 interface BaseAPILayer {
-  alert: (message: string, type?: AlertType | undefined, timeout?: number) => void;
+  alert: (message: string, type?: string, timeout?: number) => void;
   enterModalMode: () => Promise<void>;
   exitModalMode: () => Promise<void>;
   /** @deprecated use "closeWidget()" method instead */

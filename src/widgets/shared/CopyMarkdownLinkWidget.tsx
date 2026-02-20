@@ -7,8 +7,8 @@ import {ControlsHeight} from '@jetbrains/ring-ui-built/components/global/control
 import copyIcon from '@jetbrains/icons/copy-20px';
 import helpIcon from '@jetbrains/icons/help';
 import LoaderInline from '@jetbrains/ring-ui-built/components/loader-inline/loader-inline';
-import type {HostAPI} from '../../@types/globals.d';
-import {fetchEntityAndTemplate} from './helpers';
+import type {HostAPI} from '../../../@types/globals.d';
+import {fetchEntityAndTemplate} from './utils';
 import {copyWithNavigator, copyWithInputRef, copyWithTextarea} from './clipboard';
 
 interface CopyMarkdownLinkWidgetProps {
