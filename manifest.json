@@ -2,6 +2,7 @@
   "name": "copy-context",
   "title": "Copy context as Markdown",
   "description": "Copy issue and article context as Markdown.",
+  "version": "1.0.0",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
   "vendor": {
     "name": "Maksim Fedorov",
