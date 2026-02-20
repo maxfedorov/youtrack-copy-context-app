@@ -2,7 +2,7 @@
   "name": "copy-context",
   "title": "Copy link and context as Markdown",
   "description": "Copy issue/article context or a configurable Markdown link to your clipboard.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "$schema": "https://json.schemastore.org/youtrack-app.json",
   "vendor": {
     "name": "Maksim Fedorov",
