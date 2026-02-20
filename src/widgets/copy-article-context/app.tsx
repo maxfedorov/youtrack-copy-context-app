@@ -17,6 +17,7 @@ interface ArticleData {
   idReadable?: string;
   summary?: string;
   content?: string;
+  url?: string;
   reporter?: UserRef | null;
   created?: number;
   project?: ProjectRef | null;
@@ -30,6 +31,7 @@ interface ArticleData {
 const defaultOptions = {
   id: true,
   summary: true,
+  link: false,
   description: true, // used as "Content" for articles
   project: true,
   reporter: false,
@@ -90,12 +92,15 @@ const AppComponent: React.FunctionComponent = () => {
           'CommentReactionCategory','CommentTemporarilyDeletedCategory','CommentVisibilityCategory'
         ].join(',');
 
-        const [articleData, activitiesData] = await Promise.all([
+        const [articleData, activitiesData, entityInfo] = await Promise.all([
           host.fetchYouTrack(`articles/${articleId}?fields=${articleFields}`),
-          host.fetchYouTrack(`articles/${articleId}/activitiesPage?categories=${commentCategories}&fields=activities(author(login,fullName),timestamp,category(id),added(text,$type),removed(text,$type))`)
+          host.fetchYouTrack(`articles/${articleId}/activitiesPage?categories=${commentCategories}&fields=activities(author(login,fullName),timestamp,category(id),added(text,$type),removed(text,$type))`),
+          host.fetchApp('backend/get-article-info', {scope: true})
         ]);
 
-        setArticle(extractResult(articleData) as ArticleData);
+        const restArticle = extractResult(articleData) as ArticleData;
+        const info = extractResult(entityInfo) as { url?: string };
+        setArticle({...restArticle, url: info?.url});
         const activitiesPage = extractResult(activitiesData) as { activities?: ActivityItem[] };
         setActivities(activitiesPage?.activities || []);
       } catch (e: any) {
@@ -132,6 +137,10 @@ const AppComponent: React.FunctionComponent = () => {
 
     if (options.project && article.project) {
       lines.push(`Project: ${safe(article.project.shortName, article.project.name || '')}`.trim());
+    }
+
+    if (options.link && article.url) {
+      lines.push(`Link: ${article.url}`);
     }
 
     if (options.reporter && article.reporter) {
@@ -219,6 +228,7 @@ const AppComponent: React.FunctionComponent = () => {
   const items: { key: keyof Options; label: string }[] = [
     {key: 'id', label: 'ID'},
     {key: 'summary', label: 'Summary'},
+    {key: 'link', label: 'Link'},
     {key: 'description', label: 'Content'},
     {key: 'project', label: 'Project'},
     {key: 'reporter', label: 'Reporter'},

@@ -7,8 +7,8 @@ Copy issue and article context or a configurable Markdown link to your clipboard
 - **Copy Markdown Link**: A separate widget to copy the current entity as a Markdown link using a custom template.
 - Works for both Issues and Articles.
 - Granular options per section for context:
-  - Issue: ID, Summary, Description, Project, Reporter, Created, Tags, Fields, Attachments, Links, Comments.
-  - Article: ID, Summary, Content, Project, Reporter, Created, Tags, Attachments, Comments.
+  - Issue: ID, Summary, Link, Description, Project, Reporter, Created, Tags, Fields, Attachments, Links, Comments.
+  - Article: ID, Summary, Link, Content, Project, Reporter, Created, Tags, Attachments, Comments.
 - **Custom Template**: Configure the Markdown link template in the app settings on the project settings page.
 - Remembers your context selection per user (stored in the `User` entity).
 

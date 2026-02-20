@@ -23,6 +23,7 @@ interface IssueData {
   idReadable?: string;
   summary?: string;
   description?: string;
+  url?: string;
   reporter?: UserRef | null;
   created?: number;
   project?: ProjectRef | null;
@@ -39,6 +40,7 @@ interface IssueLink { direction?: string; linkType?: LinkType; issues?: { idRead
 const defaultOptions = {
   id: true,
   summary: true,
+  link: false,
   description: true,
   project: true,
   reporter: false,
@@ -101,13 +103,16 @@ const AppComponent: React.FunctionComponent = () => {
           'CommentReactionCategory','CommentTemporarilyDeletedCategory','CommentVisibilityCategory'
         ].join(',');
 
-        const [issueData, linksData, activitiesData] = await Promise.all([
+        const [issueData, linksData, activitiesData, entityInfo] = await Promise.all([
           host.fetchYouTrack(`issues/${issueId}?fields=${issueFields}`),
           host.fetchYouTrack(`issues/${issueId}/links?fields=direction,linkType(name,localizedName,sourceToTarget,localizedSourceToTarget,targetToSource,localizedTargetToSource),issues(idReadable,summary)`),
-          host.fetchYouTrack(`issues/${issueId}/activitiesPage?categories=${commentCategories}&fields=activities(author(login,fullName),timestamp,category(id),added(text,$type),removed(text,$type))`)
+          host.fetchYouTrack(`issues/${issueId}/activitiesPage?categories=${commentCategories}&fields=activities(author(login,fullName),timestamp,category(id),added(text,$type),removed(text,$type))`),
+          host.fetchApp('backend/get-issue-info', {scope: true})
         ]);
 
-        setIssue(extractResult(issueData) as IssueData);
+        const restIssue = extractResult(issueData) as IssueData;
+        const info = extractResult(entityInfo) as { url?: string };
+        setIssue({...restIssue, url: info?.url});
         setLinks((extractResult(linksData) as IssueLink[]) || []);
         const activitiesPage = extractResult(activitiesData) as { activities?: ActivityItem[] };
         setActivities(activitiesPage?.activities || []);
@@ -145,6 +150,10 @@ const AppComponent: React.FunctionComponent = () => {
 
     if (options.project && issue.project) {
       lines.push(`Project: ${safe(issue.project.shortName, issue.project.name || '')}`.trim());
+    }
+
+    if (options.link && issue.url) {
+      lines.push(`Link: ${issue.url}`);
     }
 
     if (options.reporter && issue.reporter) {
@@ -279,6 +288,7 @@ const AppComponent: React.FunctionComponent = () => {
   const items: { key: keyof Options; label: string }[] = [
     {key: 'id', label: 'ID'},
     {key: 'summary', label: 'Summary'},
+    {key: 'link', label: 'Link'},
     {key: 'description', label: 'Description'},
     {key: 'project', label: 'Project'},
     {key: 'reporter', label: 'Reporter'},
