@@ -16,7 +16,7 @@
       "indexPath": "copy-issue-context/index.html",
       "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
       "guard": "({entity}) => !entity.draft",
-      "iconPath": "copy-issue-context/widget-icon.svg",
+      "iconPath": "copy-issue-context/copy.svg",
       "description": "Copy selected issue details as Markdown (ID, Summary, Description, Project, Tags, Fields, Attachments, Links, Comments).",
       "expectedDimensions": {
         "height": 300,
@@ -29,7 +29,7 @@
       "indexPath": "copy-article-context/index.html",
       "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
       "guard": "({entity}) => !entity.draft",
-      "iconPath": "copy-article-context/widget-icon.svg",
+      "iconPath": "copy-article-context/copy.svg",
       "description": "Copy selected article details as Markdown (ID, Summary, Content, Project, Tags, Attachments, Comments).",
       "expectedDimensions": {
         "height": 300,
@@ -42,7 +42,7 @@
       "indexPath": "copy-issue-id-markdown-link/index.html",
       "extensionPoint": "ISSUE_OPTIONS_MENU_ITEM",
       "guard": "({entity}) => !entity.draft",
-      "iconPath": "copy-issue-id-markdown-link/widget-icon.svg",
+      "iconPath": "copy-issue-id-markdown-link/link.svg",
       "expectedDimensions": {
         "height": 200
       },
@@ -54,7 +54,7 @@
       "indexPath": "copy-article-id-markdown-link/index.html",
       "extensionPoint": "ARTICLE_OPTIONS_MENU_ITEM",
       "guard": "({entity}) => !entity.draft",
-      "iconPath": "copy-article-id-markdown-link/widget-icon.svg",
+      "iconPath": "copy-article-id-markdown-link/link.svg",
       "expectedDimensions": {
         "height": 200
       },
